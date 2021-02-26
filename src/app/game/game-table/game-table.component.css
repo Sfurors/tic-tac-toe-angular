@@ -1,0 +1,12 @@
+.game-table
+{
+    width: 612px;
+	height: 612px;
+	margin: 0 auto;
+    background-color:gray;
+     color: black;
+     border: 6px solid black;
+	display: grid;
+	grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+}
+
