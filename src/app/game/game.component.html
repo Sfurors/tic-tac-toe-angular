@@ -1,2 +1,2 @@
-<app-game-table></app-game-table>
-<app-game-nav-panel></app-game-nav-panel>
+<app-game-table [tableState]="currentTableState"></app-game-table>
+<app-game-nav-panel (resetTriggered) = "resetTableState()"></app-game-nav-panel>

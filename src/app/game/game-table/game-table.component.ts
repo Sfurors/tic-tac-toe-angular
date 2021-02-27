@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { CellCoordinates } from '../models/game.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CellCoordinates, Sign } from '../models/game.model';
 
 @Component({
   selector: 'app-game-table',
@@ -7,9 +7,11 @@ import { CellCoordinates } from '../models/game.model';
   styleUrls: ['./game-table.component.css']
 })
 export class GameTableComponent implements OnInit {
+  @Input() tableState: Sign[][];
   @Output() cellSelected = new EventEmitter<CellCoordinates>();
-  readonly ROW_NUMBERS: number[] = [1, 2, 3];
-  readonly COLUMN_NUMBERS: number[] = [1, 2, 3];
+  readonly ROW_NUMBERS: number[] = [0, 1, 2];
+  readonly COLUMN_NUMBERS: number[] = [0, 1, 2];
+  currentSelection: CellCoordinates;
 
   constructor() { }
 
@@ -18,6 +20,8 @@ export class GameTableComponent implements OnInit {
 
   onCellSelected(column: number, row: number) {
     const selectedCell = {column, row} as CellCoordinates;
+    //selectedCell !== this.currentSelection : how to handle selection of another cell? (player changed his mind)
+    this.currentSelection = selectedCell;
     this.cellSelected.emit(selectedCell);
   }
 }

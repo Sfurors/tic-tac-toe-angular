@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { CellCoordinates, GameStateDto } from '../models/game.model';
+import { CellCoordinates, GameStateDto, Sign } from '../models/game.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +20,40 @@ export class GameService {
       catchError(e => {
         return throwError(e);
       }));
+  }
+
+  getGameTableState(): Observable<GameStateDto> {
+    //quick in memory table state mock
+    let tableState: Sign[][] = [];
+    for(let i: number = 0; i < 3; i++) {
+      tableState[i] = [];
+      for(let j: number = 0; j < 3; j++) {
+          i % 2 ? tableState[i][j] = Sign.X : tableState[i][j] = Sign.O;
+          !(i % 2) ? tableState[i][j] = Sign.X : tableState[i][j] = Sign.O;
+       }
+    }
+    let verdict = '';
+    let game = {tableState, verdict} as GameStateDto;
+    return of(game);
+    // return get<T>(url: string, params: any): Observable<T> {
+    //   return this.httpClient.get<T>(`${this.API_HOST}${url}`, {params}).pipe(
+    //     catchError(e => {
+    //       return throwError(e);//TODO error handling
+    //     }));
+  }
+
+  resetGameTable(): Observable<GameStateDto> {
+    // mock reset table
+    let emptyTableState: Sign[][] = [];
+    for(let i: number = 0; i < 3; i++) {
+      emptyTableState[i] = [];
+      for(let j: number = 0; j < 3; j++) {
+       }
+    }
+    let verdict = 'draw';
+    let game = {tableState: emptyTableState, verdict} as GameStateDto;
+    return of(game);
+    //return this.get('link/to/spring/api', null);
   }
 
   //TODO reset game state??

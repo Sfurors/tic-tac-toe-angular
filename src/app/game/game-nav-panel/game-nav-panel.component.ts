@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-game-nav-panel',
@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./game-nav-panel.component.scss']
 })
 export class GameNavPanelComponent implements OnInit {
+  @Output() resetTriggered = new EventEmitter<void>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onResetGameTableState() {
+    this.resetTriggered.emit();
   }
 
 }
