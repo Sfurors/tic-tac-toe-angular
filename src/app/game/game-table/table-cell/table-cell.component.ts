@@ -7,10 +7,9 @@ import { Sign } from '../../models/game.model';
   styleUrls: ['./table-cell.component.scss']
 })
 export class TableCellComponent implements OnInit {
-  @Input() cellSelectionReset: boolean;
   @Input() sign: Sign;
   @Output() cellSelected = new EventEmitter<boolean>();
-  isCellSelected: boolean;
+  @Input() isCellSelected: boolean;
 
   constructor() { }
 
@@ -18,7 +17,12 @@ export class TableCellComponent implements OnInit {
   }
 
   onCellSelected(): void {
-    this.isCellSelected = !this.isCellSelected;
+    this.isCellSelected = true;
     this.cellSelected.emit(this.isCellSelected);
   }
+
+  onClickOutside() {
+    this.isCellSelected = false;
+  }
+
 }

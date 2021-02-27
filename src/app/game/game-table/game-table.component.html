@@ -1,7 +1,8 @@
 <div class="game-table">
         <ng-container *ngFor="let column of COLUMN_NUMBERS; let i = index">
                 <ng-container *ngFor="let row of ROW_NUMBERS; let j = index">
-                        <app-table-cell [sign] = "tableState[i][j]" (cellSelected)="onCellSelected(i, j)" ></app-table-cell>
+                        <app-table-cell [sign] = "tableState[i][j]" (cellSelected)="onCellSelected(i, j)"></app-table-cell>
                 </ng-container>
         </ng-container>
 </div>
+<!-- [isCellSelected] = "validateMove({column: j, row: i})" TODO show possible moves?--> 

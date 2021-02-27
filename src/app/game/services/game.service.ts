@@ -29,11 +29,15 @@ export class GameService {
       tableState[i] = [];
       for(let j: number = 0; j < 3; j++) {
           i % 2 ? tableState[i][j] = Sign.X : tableState[i][j] = Sign.O;
-          !(i % 2) ? tableState[i][j] = Sign.X : tableState[i][j] = Sign.O;
        }
-    }
+      }
+
+    tableState[0][2] = null;
+    tableState[0][1] = null;
+    tableState[2][2] = null;
     let verdict = '';
-    let game = {tableState, verdict} as GameStateDto;
+    let currentPlayer = Sign.O;
+    let game = {tableState, verdict, currentPlayer} as GameStateDto;
     return of(game);
     // return get<T>(url: string, params: any): Observable<T> {
     //   return this.httpClient.get<T>(`${this.API_HOST}${url}`, {params}).pipe(

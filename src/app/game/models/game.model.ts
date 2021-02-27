@@ -6,6 +6,7 @@ export interface CellCoordinates {
 export interface GameStateDto {
     tableState: Sign[][]; //Current table state (moves)
     verdict: string; //TODO which data I want retrieve from backend?
+    currentPlayer: Sign;
 }
 
 export enum Sign {

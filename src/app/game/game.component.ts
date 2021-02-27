@@ -11,6 +11,7 @@ export class GameComponent implements OnInit {
   @Input() currentCellCoordinates: CellCoordinates;
   currentTableState: Sign[][];
   verdict: string;
+  currentPlayer: Sign;
   constructor(private readonly gameService: GameService) { }
 
   ngOnInit() {
@@ -22,8 +23,10 @@ export class GameComponent implements OnInit {
   }
 
   getTableState() {
-    this.gameService.getGameTableState().subscribe(val =>
-      this.currentTableState = val.tableState);
+    this.gameService.getGameTableState().subscribe(val =>{
+      this.currentTableState = val.tableState;
+      this.currentPlayer = val.currentPlayer;
+    });
   }
 
   resetTableState() {
