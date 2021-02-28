@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CellCoordinates, Sign } from './models/game.model';
+import { switchMap } from 'rxjs/operators';
+import { CellCoordinates, GameStateDto, Sign } from './models/game.model';
 import { GameService } from './services/game.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class GameComponent implements OnInit {
   currentTableState: Sign[][];
   verdict: string;
   currentPlayer: Sign;
-  
+
   constructor(private readonly gameService: GameService) { }
 
   ngOnInit() {
@@ -24,23 +25,29 @@ export class GameComponent implements OnInit {
   }
 
   onSubmit() {
-    this.gameService.submit(this.currentCellCoordinates).subscribe();
-    this.getTableState();
-  }
-
-  getTableState() {
-    this.gameService.getGameTableState().subscribe(val => {
-      this.currentTableState = val.tableState;
-      this.currentPlayer = val.currentPlayer;
-    });
-  }
-
-  resetTableState() {
-    this.gameService.resetGameTable().subscribe(val => {
-        this.currentTableState = val.tableState;
-        this.verdict = val.verdict;
+    this.gameService.submit(this.currentCellCoordinates).subscribe((val: GameStateDto) => {
+      this.getGameState(val);
     });
     this.currentCellCoordinates = null;
+  }
+
+  getTableState(): void {
+    this.gameService.getGameTableState().subscribe((val: GameStateDto) => {
+      this.getGameState(val);
+    });
+  }
+
+  resetTableState(): void {
+    this.gameService.resetGameTable().subscribe((val: GameStateDto) => {
+      this.getGameState(val);
+    });
+    this.currentCellCoordinates = null;
+  }
+
+  private getGameState(val: GameStateDto): void {
+    this.currentTableState = val.tableState;
+    this.currentPlayer = val.currentPlayer;
+    this.verdict = val.verdict;
   }
 
 }

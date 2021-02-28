@@ -5,6 +5,7 @@ import { TableCellComponent } from './game-table/table-cell/table-cell.component
 import { GameNavPanelComponent } from './game-nav-panel/game-nav-panel.component';
 import { GameComponent } from './game.component';
 import { ClickOutsideModule } from 'ng-click-outside';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ClickOutsideModule } from 'ng-click-outside';
   ],
   imports: [
     CommonModule,
-    ClickOutsideModule
+    ClickOutsideModule,
+    MatSnackBarModule,
   ],
   exports: [
     GameComponent

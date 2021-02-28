@@ -21,9 +21,7 @@ export class GameTableComponent implements OnInit {
 
   onCellSelected(column: number, row: number) {
     const selectedCell = {column, row} as CellCoordinates;
-    if (this.tableState[column][row]) {
-      //handling message prompt?
-    } else {
+    if (!this.tableState[column][row]) {
       this.currentSelection = selectedCell;
       this.cellSelected.emit(selectedCell);
     }
