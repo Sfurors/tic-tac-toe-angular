@@ -4,8 +4,8 @@ export interface CellCoordinates {
 }
 
 export interface GameStateDto {
-    tableState: Sign[][]; //Current table state (moves)
-    verdict: string; //TODO which data I want retrieve from backend?
+    tableState: Sign[][];
+    verdict: string;
     currentPlayer: Sign;
 }
 

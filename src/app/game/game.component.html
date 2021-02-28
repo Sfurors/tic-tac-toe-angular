@@ -1,2 +1,2 @@
-<app-game-table *ngIf="currentTableState" [tableState]="currentTableState" [currentPlayer]="currentPlayer"></app-game-table>
-<app-game-nav-panel (resetTriggered) = "resetTableState()"></app-game-nav-panel>
+<app-game-table (cellSelected)="onCellSelected($event)" *ngIf="currentTableState" [tableState]="currentTableState" [currentPlayer]="currentPlayer" [currentSelection]="currentCellCoordinates"></app-game-table>
+<app-game-nav-panel (resetTriggered) = "resetTableState()" (submitTriggered)="onSubmit()"></app-game-nav-panel>

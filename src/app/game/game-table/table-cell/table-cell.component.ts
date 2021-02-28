@@ -17,7 +17,6 @@ export class TableCellComponent implements OnInit {
   }
 
   onCellSelected(): void {
-    //this.isCellSelected = true;
     this.cellSelected.emit(this.isCellSelected);
   }
 

@@ -7,6 +7,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class GameNavPanelComponent implements OnInit {
   @Output() resetTriggered = new EventEmitter<void>();
+  @Output() submitTriggered = new EventEmitter<void>();
 
   constructor() { }
 
@@ -15,6 +16,10 @@ export class GameNavPanelComponent implements OnInit {
 
   onResetGameTableState() {
     this.resetTriggered.emit();
+  }
+
+  onSubmitPlayerMove() {
+    this.submitTriggered.emit();
   }
 
 }
