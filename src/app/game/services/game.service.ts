@@ -7,8 +7,8 @@ import { CellCoordinates, GameStateDto, Sign } from '../models/game.model';
   providedIn: 'root'
 })
 export class GameService {
-  readonly API_HOST = 'https://localhost:4001/api/';//TODO spring uri
-  
+  readonly API_HOST = 'http://localhost:8081/api/';//TODO spring uri
+
   headers = new HttpHeaders({
     'Content-Type':  'application/json;charset=utf-8',
   });
@@ -39,11 +39,7 @@ export class GameService {
     let currentPlayer = Sign.O;
     let game = {tableState, verdict, currentPlayer} as GameStateDto;
     return of(game);
-    // return get<T>(url: string, params: any): Observable<T> {
-    //   return this.httpClient.get<T>(`${this.API_HOST}${url}`, {params}).pipe(
-    //     catchError(e => {
-    //       return throwError(e);//TODO error handling
-    //     }));
+   // return this.get<GameStateDto>(`${'game-state'}`, null);
   }
 
   resetGameTable(): Observable<GameStateDto> {
@@ -62,10 +58,7 @@ export class GameService {
 
   //TODO reset game state??
   private get<T>(url: string, params: any): Observable<T> {
-    return this.httpClient.get<T>(`${this.API_HOST}${url}`, {params}).pipe(
-      catchError(e => {
-        return throwError(e);//TODO error handling
-      }));
+    return this.httpClient.get<T>(`${this.API_HOST}${url}`, {params});
   }
 //TODO post coordinates or whole board?? what to get from there?
   private post(url: string, data: any): Observable<any> {

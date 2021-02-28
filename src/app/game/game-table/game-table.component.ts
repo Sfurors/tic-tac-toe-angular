@@ -5,10 +5,9 @@ import { TableCellComponent } from './table-cell/table-cell.component';
 @Component({
   selector: 'app-game-table',
   templateUrl: './game-table.component.html',
-  styleUrls: ['./game-table.component.css']
+  styleUrls: ['./game-table.component.scss']
 })
 export class GameTableComponent implements OnInit {
-  //@ViewChild(TableCellComponent) tableCell: TableCellComponent;
   @Input() tableState: Sign[][];
   @Input() currentPlayer: Sign;
   @Output() cellSelected = new EventEmitter<CellCoordinates>();
@@ -24,13 +23,15 @@ export class GameTableComponent implements OnInit {
   onCellSelected(column: number, row: number) {
     const selectedCell = {column, row} as CellCoordinates;
     if (this.tableState[column][row]) {
-      //handling message prompt??
+      //handling message prompt?
     } else {
-      //this.tableCell.isCellSelected = true; //TODO doesnt work
       this.currentSelection = selectedCell;
       this.cellSelected.emit(selectedCell);
     }
-    //selectedCell !== this.currentSelection : how to handle selection of another cell? (player changed his mind)
+  }
+
+  isCellSelected(column: number, row: number): boolean {
+    return !this.tableState[column][row] && this.currentSelection?.column === column && this.currentSelection?.row === row;
   }
 
   validateMove(potentialMoveCoordinates: CellCoordinates): boolean {

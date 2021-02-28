@@ -9,7 +9,7 @@ import { Sign } from '../../models/game.model';
 export class TableCellComponent implements OnInit {
   @Input() sign: Sign;
   @Output() cellSelected = new EventEmitter<boolean>();
-  @Input() isCellSelected: boolean;
+  isCellSelected: boolean;
 
   constructor() { }
 
@@ -17,7 +17,7 @@ export class TableCellComponent implements OnInit {
   }
 
   onCellSelected(): void {
-    this.isCellSelected = true;
+    //this.isCellSelected = true;
     this.cellSelected.emit(this.isCellSelected);
   }
 
