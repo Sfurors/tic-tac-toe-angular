@@ -1,0 +1,16 @@
+.cell {
+    border: 6px solid black;
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+}
+
+.cell:hover {
+    background: #e4e4e4;
+    cursor: pointer;
+}

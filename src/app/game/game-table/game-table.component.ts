@@ -1,26 +1,26 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { CellCoordinates, Sign } from '../models/game.model';
 
 @Component({
   selector: 'app-game-table',
   templateUrl: './game-table.component.html',
-  styleUrls: ['./game-table.component.scss']
+  styleUrls: ['./game-table.component.css']
 })
-export class GameTableComponent implements OnInit {
+export class GameTableComponent {
+
   @Input() tableState: Sign[][];
   @Input() currentPlayer: Sign;
   @Input() currentSelection: CellCoordinates;
+
   @Output() cellSelected = new EventEmitter<CellCoordinates>();
+
   readonly ROW_NUMBERS: number[] = [0, 1, 2];
   readonly COLUMN_NUMBERS: number[] = [0, 1, 2];
 
-  constructor() { }
+  onCellSelected(column: number, row: number): void {
+    const selectedCell = { column, row } as CellCoordinates;
 
-  ngOnInit() {
-  }
-
-  onCellSelected(column: number, row: number) {
-    const selectedCell = {column, row} as CellCoordinates;
     if (!this.tableState[column][row]) {
       this.currentSelection = selectedCell;
       this.cellSelected.emit(selectedCell);
@@ -32,9 +32,4 @@ export class GameTableComponent implements OnInit {
       && this.currentSelection?.column === column
       && this.currentSelection?.row === row;
   }
-
-  validateMove(potentialMoveCoordinates: CellCoordinates): boolean {
-    return !this.tableState[potentialMoveCoordinates.row][potentialMoveCoordinates.column];
-  }
-
 }

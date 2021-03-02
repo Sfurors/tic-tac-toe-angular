@@ -1,27 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { Sign } from '../../models/game.model';
 
 @Component({
   selector: 'app-table-cell',
   templateUrl: './table-cell.component.html',
-  styleUrls: ['./table-cell.component.scss']
+  styleUrls: ['./table-cell.component.css']
 })
-export class TableCellComponent implements OnInit {
+export class TableCellComponent {
+
   @Input() sign: Sign;
-  @Output() cellSelected = new EventEmitter<boolean>();
-  isCellSelected: boolean;
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  @Output() cellSelected = new EventEmitter<void>();
 
   onCellSelected(): void {
-    this.cellSelected.emit(this.isCellSelected);
+    this.cellSelected.emit();
   }
-
-  onClickOutside() {
-    this.isCellSelected = false;
-  }
-
 }

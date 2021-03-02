@@ -1,8 +1,8 @@
-.navbar .btn {
-    margin: 2rem;
-}
-
 .navbar {
     display: flex;
     justify-content: center;
+}
+
+.navbar .btn {
+    margin: 2rem;
 }

@@ -1,25 +1,20 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-game-nav-panel',
   templateUrl: './game-nav-panel.component.html',
-  styleUrls: ['./game-nav-panel.component.scss']
+  styleUrls: ['./game-nav-panel.component.css']
 })
-export class GameNavPanelComponent implements OnInit {
+export class GameNavPanelComponent {
+
   @Output() resetTriggered = new EventEmitter<void>();
   @Output() submitTriggered = new EventEmitter<void>();
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  onResetGameTableState() {
+  onResetGameTableState(): void {
     this.resetTriggered.emit();
   }
 
-  onSubmitPlayerMove() {
+  onSubmitPlayerMove(): void {
     this.submitTriggered.emit();
   }
-
 }
