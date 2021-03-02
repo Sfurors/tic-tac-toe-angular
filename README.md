@@ -1,6 +1,9 @@
 # TicTacToeAngular
+Git repo with server: https://github.com/Sfurors/tic-tac-toe-spring
+In order to run game, please run server first!
+Start client with npm start -o or ng serve -o via e.g. terminal opened in project folder.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.2.
+
 
 ## Development server
 
