@@ -35,4 +35,26 @@ describe('GameTableComponent', () => {
     expect(result).toBe(true);
   });
 
+  it('should return false as cell is not selected, occupied', () => {
+    component.currentSelection = {column: 1, row: 1} as CellCoordinates;
+    tableState[1][1] = Sign.O;
+    let result = component.isCellSelected(1, 1);
+    expect(result).toBe(false);
+  });
+
+  it('should change current selection coordinates', () => {
+    component.currentSelection = {} as CellCoordinates;
+    component.onCellSelected(1, 1);
+
+    expect(component.currentSelection).toEqual({column: 1, row: 1} as CellCoordinates);
+  });
+
+  it('should not change current selection coordinates', () => {
+    component.currentSelection = {} as CellCoordinates;
+    tableState[1][1] = Sign.O;
+    component.onCellSelected(1, 1);
+
+    expect(component.currentSelection).toEqual({} as CellCoordinates);
+  });
+
 });
