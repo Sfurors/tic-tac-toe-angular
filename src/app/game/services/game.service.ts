@@ -26,7 +26,11 @@ export class GameService {
   submit(cellCoordinates: CellCoordinates): Observable<GameStateDto> {
     return this.post<GameStateDto>('submit', cellCoordinates)
       .pipe(
-        tap((data: GameStateDto) => this.openPopupBar(data?.verdict, this.OK_ACTION),
+        tap((data: GameStateDto) => {
+          if (data.verdict != null) {
+            this.openPopupBar(data?.verdict, this.OK_ACTION);
+          }
+        },
           catchError((err: HttpErrorResponse) => {
             this.openPopupBar(this.ERROR_MESSAGE, this.OK_ACTION);
             return throwError(err);
@@ -47,12 +51,11 @@ export class GameService {
   resetGameTable(): Observable<GameStateDto> {
     return this.get<GameStateDto>('reset', null)
       .pipe(
-        tap((data: GameStateDto) => this.openPopupBar(data?.verdict, this.OK_ACTION),
-          catchError((err: HttpErrorResponse) => {
-            this.openPopupBar(this.ERROR_MESSAGE, this.OK_ACTION);
-            return throwError(err);
-          })
-        ));
+        catchError((err: HttpErrorResponse) => {
+          this.openPopupBar(this.ERROR_MESSAGE, this.OK_ACTION);
+          return throwError(err);
+        })
+      );
   }
 
   private get<T>(url: string, params: any): Observable<T> {

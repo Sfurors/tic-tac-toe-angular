@@ -28,8 +28,7 @@ export class GameTableComponent {
   }
 
   isCellSelected(column: number, row: number): boolean {
-    return !this.tableState[column][row]
-      && this.currentSelection?.column === column
+    return this.currentSelection?.column === column
       && this.currentSelection?.row === row;
   }
 }

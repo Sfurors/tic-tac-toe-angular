@@ -13,6 +13,7 @@ export class GameComponent implements OnInit {
 
   currentTableState: Sign[][];
   currentPlayer: Sign;
+  previousSelection: CellCoordinates;
 
   constructor(private readonly gameService: GameService) { }
 
@@ -22,6 +23,14 @@ export class GameComponent implements OnInit {
 
   onCellSelected(cellCoordinates: CellCoordinates): void {
     this.currentCellCoordinates = cellCoordinates;
+    if (this.previousSelection == null) {
+      this.previousSelection = cellCoordinates;
+    }
+    if (this.currentCellCoordinates !== this.previousSelection) {
+      this.currentTableState[this.previousSelection.column][this.previousSelection.row] = null;
+    }
+    this.previousSelection = this.currentCellCoordinates;
+    this.currentTableState[cellCoordinates.column][cellCoordinates.row] = this.currentPlayer;
   }
 
   onSubmit(): void {
@@ -29,7 +38,6 @@ export class GameComponent implements OnInit {
       .subscribe((val: GameStateDto) => {
         this.getGameState(val);
       });
-    this.currentCellCoordinates = null;
   }
 
   getTableState(): void {
@@ -44,11 +52,12 @@ export class GameComponent implements OnInit {
       .subscribe((val: GameStateDto) => {
         this.getGameState(val);
       });
-    this.currentCellCoordinates = null;
   }
 
   private getGameState(val: GameStateDto): void {
     this.currentTableState = val.tableState;
     this.currentPlayer = val.currentPlayer;
+    this.previousSelection = null;
+    this.currentCellCoordinates = null;
   }
 }
